@@ -23,6 +23,11 @@ ImdbFilmListPresenter >> addFilm [
 	self updatePresenter
 ]
 
+{ #category : #testing }
+ImdbFilmListPresenter >> clickFilmAtIndex: anIndex [ 
+	filmList clickAtIndex: anIndex
+]
+
 { #category : #initialization }
 ImdbFilmListPresenter >> connectPresenters [
 filmList whenSelectionChangedDo: [ :selectedItemMode |
@@ -39,6 +44,17 @@ ImdbFilmListPresenter >> defaultLayout [
 		  add: filmList;
 		  add: detail;
 		  yourself
+]
+
+{ #category : #accessing }
+ImdbFilmListPresenter >> detail [
+	^ detail
+]
+
+{ #category : #accessing }
+ImdbFilmListPresenter >> filmList [
+
+	^ filmList
 ]
 
 { #category : #layout }

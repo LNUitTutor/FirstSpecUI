@@ -7,10 +7,39 @@ Class {
 		'director'
 	],
 	#classInstVars : [
-		'films'
+		'films',
+		'copy'
 	],
 	#category : #CodeOfSpec20BookFilm
 }
+
+{ #category : #adding }
+ImdbFilm class >> Avatar [
+^ self new
+name: 'Avatar';
+director: 'James Cameron';
+year: '2009';
+yourself
+]
+
+{ #category : #adding }
+ImdbFilm class >> ET [
+^ self new
+name: 'E.T.';
+director: 'Steven Spielberg';
+year: '1982';
+yourself
+]
+
+{ #category : #adding }
+ImdbFilm class >> addAvatar [
+films add: self Avatar
+]
+
+{ #category : #adding }
+ImdbFilm class >> addET [
+films add: self ET
+]
 
 { #category : #accessing }
 ImdbFilm class >> addFilm: aFilm [
@@ -20,6 +49,18 @@ films add: aFilm
 { #category : #accessing }
 ImdbFilm class >> films [
 ^ films ifNil: [ films := OrderedCollection new ]
+]
+
+{ #category : #initialization }
+ImdbFilm class >> reset [
+copy := films.
+films := OrderedCollection new
+]
+
+{ #category : #initialization }
+ImdbFilm class >> restore [
+films := copy.
+copy := nil.
 ]
 
 { #category : #accessing }
