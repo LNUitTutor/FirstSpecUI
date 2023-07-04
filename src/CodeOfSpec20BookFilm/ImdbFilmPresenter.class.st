@@ -9,6 +9,11 @@ Class {
 	#category : #CodeOfSpec20BookFilm
 }
 
+{ #category : #transmission }
+ImdbFilmPresenter >> defaultInputPort [
+^ self inputModelPort
+]
+
 { #category : #layout }
 ImdbFilmPresenter >> defaultLayout [
 	"^ SpGridLayout new
@@ -68,6 +73,11 @@ ImdbFilmPresenter >> initializeWindow: aWindowPresenter [
 	aWindowPresenter
 		title: 'Film';
 		initialExtent: 400 @ 200
+]
+
+{ #category : #transmission }
+ImdbFilmPresenter >> inputModelPort [
+^ SpModelPort newPresenter: self
 ]
 
 { #category : #accessing }

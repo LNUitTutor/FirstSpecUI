@@ -30,11 +30,13 @@ ImdbFilmListPresenter >> clickFilmAtIndex: anIndex [
 
 { #category : #initialization }
 ImdbFilmListPresenter >> connectPresenters [
-filmList whenSelectionChangedDo: [ :selectedItemMode |
-selectedItemMode isEmpty
-ifFalse: [ detail setModel: selectedItemMode
-selectedItem ] ].
 
+	filmList whenSelectionChangedDo: [ :selectedItemMode |
+		selectedItemMode isEmpty ifFalse: [
+			detail setModel: selectedItemMode selectedItem ] ]
+
+	"Transmitting from my filmList to detail - it does not work!!!"
+	"filmList transmitTo: detail"
 ]
 
 { #category : #layout }
