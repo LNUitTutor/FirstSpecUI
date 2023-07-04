@@ -85,6 +85,21 @@ ImdbFilmListPresenter >> initializeWindow: aWindowPresenter [
 ]
 
 { #category : #layout }
+ImdbFilmListPresenter >> listAboveLayout [
+^ SpBoxLayout newTopToBottom
+add: detail;
+add: filmList;
+yourself
+]
+
+{ #category : #layout }
+ImdbFilmListPresenter >> listOnlyLayout [
+^ SpBoxLayout newTopToBottom
+add: filmList;
+yourself
+]
+
+{ #category : #layout }
 ImdbFilmListPresenter >> updatePresenter [
 
 	filmList items: ImdbFilm films
