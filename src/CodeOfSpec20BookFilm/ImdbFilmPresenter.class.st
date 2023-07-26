@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'nameText',
 		'directorText',
-		'yearNumber'
+		'yearNumber',
+		'nameLabel'
 	],
 	#category : #CodeOfSpec20BookFilm
 }
@@ -29,7 +30,8 @@ ImdbFilmPresenter >> defaultLayout [
 		  builder
 			  beColumnNotHomogeneous;
 			  column: 2 withConstraints: #beExpand;
-			  add: 'Name'; add: nameText; nextRow;
+			  "add: 'Name'; changed by the next chunk" add: nameLabel;
+			  add: nameText; nextRow;
 			  add: 'Director'; add: directorText; nextRow;
 			  add: 'Year'; add: yearNumber ]
 ]
@@ -59,6 +61,11 @@ ImdbFilmPresenter >> initializeDialogWindow: aDialogPresenter [
 
 { #category : #initialization }
 ImdbFilmPresenter >> initializePresenters [
+
+	nameLabel := self newLabel
+		             label: 'Name';
+		             addStyle: 'customLabel';
+		             yourself.
 
 	nameText := self newTextInput.
 	directorText := self newTextInput.
