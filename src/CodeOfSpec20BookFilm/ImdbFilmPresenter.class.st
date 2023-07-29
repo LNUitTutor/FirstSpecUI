@@ -61,12 +61,12 @@ ImdbFilmPresenter >> initializeDialogWindow: aDialogPresenter [
 
 { #category : #initialization }
 ImdbFilmPresenter >> initializePresenters [
-
+	"presener with style - just added"
 	nameLabel := self newLabel
 		             label: 'Name';
 		             addStyle: 'customLabel';
 		             yourself.
-
+	"stable part"
 	nameText := self newTextInput.
 	directorText := self newTextInput.
 	yearNumber := self newNumberInput
