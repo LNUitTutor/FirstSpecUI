@@ -63,9 +63,9 @@ ImdbFilmListPresenter >> filmList [
 ImdbFilmListPresenter >> initializePresenters [
 
 	filmList := self newTable
-		 addColumn: (SpStringTableColumn title: 'Name' evaluated: #name);
-		 addColumn: (SpStringTableColumn title: 'Director' evaluated: #director);
-		 addColumn: (SpStringTableColumn title: 'Year' evaluated: #year);
+		 addColumn: (SpStringTableColumn title: 'Name' evaluated: #name) beSortable;
+		 addColumn: (SpStringTableColumn title: 'Director' evaluated: #director) beSortable;
+		 addColumn: (SpStringTableColumn title: 'Year' evaluated: #year) beSortable;
 		 yourself.
 	detail := self instantiate: ImdbFilmPresenter.
 	detail editable: false.
