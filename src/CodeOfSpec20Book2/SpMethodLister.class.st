@@ -5,7 +5,7 @@ Class {
 		'aClass',
 		'list'
 	],
-	#category : #CodeOfSpec20Book2
+	#category : #'CodeOfSpec20Book2-WithModel'
 }
 
 { #category : #layout }
