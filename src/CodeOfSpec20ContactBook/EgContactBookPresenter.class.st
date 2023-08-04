@@ -16,6 +16,14 @@ EgContactBookPresenter class >> buildCommandsGroupWith: presenter forRoot: rootC
 		register: (EgRemoveContactCommand forSpec context: presenter)
 ]
 
+{ #category : #commands }
+EgContactBookPresenter class >> changePhoneCommandWith: presenter forRootGroup: aRootCommandsGroup [
+
+	<extensionCommands>
+	aRootCommandsGroup register:
+		(EgChangePhoneCommand forSpec context: presenter)
+]
+
 { #category : #examples }
 EgContactBookPresenter class >> coworkersExample [
 
@@ -81,6 +89,20 @@ EgContactBookPresenter >> newContact [
 		ifFalse: [
 			SpInvalidUserInput signal: 'Please enter contact name and phone (split by comma)' ].
 	^ EgContact name: splitted first phone: splitted second
+]
+
+{ #category : #'instance creation' }
+EgContactBookPresenter >> newPhone [
+
+	| phone |
+	phone := self
+		         request: 'New phone for the contact'
+		         initialAnswer: self selectedContact phone
+		         title: 'Set new phone for contact'.
+	(phone matchesRegex: '\d\d\d\s\d\d\d') ifFalse: [
+		SpInvalidUserInput signal:
+			'The phone number is not well formated. Should match "\d\d\d\s\d\d\d"' ].
+	^ phone
 ]
 
 { #category : #'accessing - model' }
