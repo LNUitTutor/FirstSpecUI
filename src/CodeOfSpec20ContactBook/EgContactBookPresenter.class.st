@@ -62,10 +62,11 @@ EgContactBookPresenter >> isContactSelected [
 EgContactBookPresenter >> newContact [
 
 	| rawData splitted |
-	rawData := self
+	[rawData := self
 		           request: 'Enter new contact name and phone (split by comma)'
 		           initialAnswer: ''
-		           title: 'Create new contact'.
+		           title: 'Create new contact'.] on: SpCancelledInteractionError
+															 do: [ :ex | ^ nil ].
 	splitted := rawData splitOn: $,.
 	(splitted size = 2 and: [ splitted allSatisfy: #isNotEmpty ])
 		ifFalse: [
@@ -96,4 +97,10 @@ EgContactBookPresenter >> table [
 EgContactBookPresenter >> table: anObject [
 
 	table := anObject
+]
+
+{ #category : #'accessing - model' }
+EgContactBookPresenter >> updateView [
+
+	table items: contactBook contents
 ]

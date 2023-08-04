@@ -8,6 +8,12 @@ Class {
 	#category : #CodeOfSpec20ContactBook
 }
 
+{ #category : #requirements }
+EgContact class >> empty [
+
+	^ self name: 'Empty' phone: 'XXX XXX'
+]
+
 { #category : #'instance creation' }
 EgContact class >> name: aNameString phone: aPhoneString [
 
