@@ -8,6 +8,14 @@ Class {
 	#category : #CodeOfSpec20ContactBook
 }
 
+{ #category : #commands }
+EgContactBookPresenter class >> buildCommandsGroupWith: presenter forRoot: rootCommandGroup [
+
+	rootCommandGroup
+		register: (EgAddContactCommand forSpec context: presenter);
+		register: (EgRemoveContactCommand forSpec context: presenter)
+]
+
 { #category : #examples }
 EgContactBookPresenter class >> coworkersExample [
 
@@ -49,6 +57,7 @@ EgContactBookPresenter >> initializePresenters [
 	table
 		addColumn: (SpStringTableColumn title: 'Name' evaluated: #name);
 		addColumn: (SpStringTableColumn title: 'Phone' evaluated: #phone).
+	table contextMenu: [ self rootCommandsGroup beRoot asMenuPresenter ].
 	table items: contactBook contents
 ]
 
