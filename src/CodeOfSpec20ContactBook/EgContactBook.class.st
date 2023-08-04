@@ -62,6 +62,11 @@ EgContactBook >> addContact: newContact after: contactAfter [
 	contacts add: newContact after: contactAfter
 ]
 
+{ #category : #accessing }
+EgContactBook >> contents [
+	^ contacts 
+]
+
 { #category : #testing }
 EgContactBook >> findContactsWithText: aText [
 
