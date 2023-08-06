@@ -3,6 +3,8 @@ Class {
 	#superclass : #SpPresenter,
 	#instVars : [
 		'addButton',
+		'doneButton',
+		'exitButton',
 		'todoListPresenter'
 	],
 	#category : #CodeOfSpec20BookTodo
@@ -25,6 +27,8 @@ TodoListPresenter >> defaultLayout [
 		  add: todoListPresenter;
 		  add: (SpBoxLayout newLeftToRight
 				   addLast: addButton expand: false;
+				   addLast: doneButton expand: false;
+					addLast: exitButton expand: false;
 				   yourself)
 		  expand: false;
 		  yourself
@@ -54,7 +58,14 @@ TodoListPresenter >> initializePresenters [
 	todoListPresenter contextMenu: self todoListContextMenu.
 	addButton := self newButton label: 'Add task';
 			action: [ self addTask ];
-			yourself .
+			yourself.
+	doneButton := self newButton label: 'Remove done';
+			action: [ self removeDoneTasks ];
+			yourself.
+	exitButton := self newButton label: 'Quit';
+	      icon: (self iconNamed: #smallQuit);
+			action: [ self application closeAllWindows ];
+			yourself.
 ]
 
 { #category : #initialization }
@@ -65,10 +76,21 @@ TodoListPresenter >> initializeWindow: aWindowPresenter [
 		initialExtent: 500 @ 500
 ]
 
+{ #category : #removing }
+TodoListPresenter >> removeDoneTasks [
+
+	(self confirm: 'Do you want to remove all completed tasks?' label: 'Confirm please')
+	ifFalse: [ ^ self ].
+	(todoListPresenter items select:[ :task | task done ]) do: [ :each | each delete ].
+	self updatePresenter
+]
+
 { #category : #actions }
 TodoListPresenter >> removeSelectedTask [
 
-	todoListPresenter selection selectedItem remove.
+	(self confirm: 'Do you want to remove the task?' label: 'Confirm please')
+	ifFalse: [ ^ self ].
+	todoListPresenter selection selectedItem delete.
 	self updatePresenter
 ]
 

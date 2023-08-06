@@ -7,5 +7,6 @@ Class {
 { #category : #running }
 TodoApplication >> start [
 
-	TodoListPresenter new open
+	"TodoListPresenter new open"
+	(self newPresenter: TodoListPresenter) open
 ]
