@@ -31,6 +31,27 @@ EgContactBookPresenter class >> coworkersExample [
 	^ (self on: EgContactBook coworkers) open
 ]
 
+{ #category : #commands }
+EgContactBookPresenter class >> extraCommandsWith: presenter forRootGroup: aRootCommandsGroup [
+
+	<extensionCommands>
+	aRootCommandsGroup register:
+		((CmCommandGroup named: 'Extra') asSpecGroup
+			 description: 'Extra commands to help during development.';
+			 register:
+				 ((EgInspectCommand forSpec context: [ presenter selectedContact ])
+					  name: 'Inspect contact';
+					  description: 'Open an inspector on the selected contact.';
+					  iconName: #smallFind;
+					  yourself);
+			 register:
+				 ((EgInspectCommand forSpec context: [ presenter contactBook ])
+					  name: 'Inspect contact book';
+					  description: 'Open an inspector on the contact book.';
+					  yourself);
+			 yourself)
+]
+
 { #category : #examples }
 EgContactBookPresenter class >> familyExample [
 
@@ -67,6 +88,14 @@ EgContactBookPresenter >> initializePresenters [
 		addColumn: (SpStringTableColumn title: 'Phone' evaluated: #phone).
 	table contextMenu: [ self rootCommandsGroup beRoot asMenuPresenter ].
 	table items: contactBook contents
+]
+
+{ #category : #initialization }
+EgContactBookPresenter >> initializeWindow: aWindowPresenter [
+
+	super initializeWindow: aWindowPresenter.
+	aWindowPresenter title: 'My tiny contactbook'.
+	self rootCommandsGroup installShortcutsIn: aWindowPresenter
 ]
 
 { #category : #testing }

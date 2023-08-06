@@ -4,6 +4,15 @@ Class {
 	#category : #CodeOfSpec20ContactBook
 }
 
+{ #category : #converting }
+EgRemoveContactCommand >> asSpecCommand [
+
+	^ super asSpecCommand
+		  iconName: #removeIcon;
+		  shortcutKey: $x meta;
+		  yourself
+]
+
 { #category : #testing }
 EgRemoveContactCommand >> canBeExecuted [
 
