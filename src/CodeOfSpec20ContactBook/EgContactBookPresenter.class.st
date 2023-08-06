@@ -3,7 +3,8 @@ Class {
 	#superclass : #SpPresenter,
 	#instVars : [
 		'table',
-		'contactBook'
+		'contactBook',
+		'menuBar'
 	],
 	#category : #CodeOfSpec20ContactBook
 }
@@ -12,8 +13,17 @@ Class {
 EgContactBookPresenter class >> buildCommandsGroupWith: presenter forRoot: rootCommandGroup [
 
 	rootCommandGroup
+		register: (self buildMenuBarGroupWith: presenter);
 		register: (EgAddContactCommand forSpec context: presenter);
 		register: (EgRemoveContactCommand forSpec context: presenter)
+]
+
+{ #category : #commands }
+EgContactBookPresenter class >> buildMenuBarGroupWith: presenter [
+
+	^ (CmCommandGroup named: 'Contact') asSpecGroup
+		  register: (EgPrintContactCommand forSpec context: presenter);
+		  yourself
 ]
 
 { #category : #commands }
@@ -75,6 +85,8 @@ EgContactBookPresenter >> defaultLayout [
 EgContactBookPresenter >> defaultSpec [
 
 	^ SpBoxLayout newVertical
+		  add: #menuBar withConstraints: [ :constraints |
+			  constraints height: SpAbstractPresenter toolbarHeight ];
 		  add: #table;
 		  yourself
 ]
@@ -87,7 +99,9 @@ EgContactBookPresenter >> initializePresenters [
 		addColumn: (SpStringTableColumn title: 'Name' evaluated: #name);
 		addColumn: (SpStringTableColumn title: 'Phone' evaluated: #phone).
 	table contextMenu: [ self rootCommandsGroup beRoot asMenuPresenter ].
-	table items: contactBook contents
+	table items: contactBook contents.
+	menuBar := (self rootCommandsGroup / 'Contact') asMenuBarPresenter.
+
 ]
 
 { #category : #initialization }
