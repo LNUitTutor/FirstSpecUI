@@ -2,10 +2,33 @@ Class {
 	#name : #TodoListPresenter,
 	#superclass : #SpPresenter,
 	#instVars : [
+		'addButton',
 		'todoListPresenter'
 	],
 	#category : #CodeOfSpec20BookTodo
 }
+
+{ #category : #adding }
+TodoListPresenter >> addTask [
+
+	(TodoTaskPresenter newApplication: self application)
+		task: TodoTask new;
+		openModal.
+	self updatePresenter
+]
+
+{ #category : #layout }
+TodoListPresenter >> defaultLayout [
+
+	^ SpBoxLayout newTopToBottom
+		  spacing: 5;
+		  add: todoListPresenter;
+		  add: (SpBoxLayout newLeftToRight
+				   addLast: addButton expand: false;
+				   yourself)
+		  expand: false;
+		  yourself
+]
 
 { #category : #initialization }
 TodoListPresenter >> initializePresenters [
@@ -19,9 +42,9 @@ TodoListPresenter >> initializePresenters [
 				                      evaluated: [ :task | task title ]);
 			 beResizable;
 		    yourself.
-	self layout: (SpBoxLayout newTopToBottom
-			 add: todoListPresenter;
-			 yourself)
+	addButton := self newButton label: 'Add task';
+			action: [ self addTask ];
+			yourself .
 ]
 
 { #category : #initialization }
