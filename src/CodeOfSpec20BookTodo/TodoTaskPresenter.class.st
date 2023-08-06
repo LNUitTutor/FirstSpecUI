@@ -14,11 +14,17 @@ TodoTaskPresenter >> accept [
 	task title: titlePresenter text; save
 ]
 
+{ #category : #visiting }
+TodoTaskPresenter >> caption [
+
+	^ self subclassResponsibility 
+]
+
 { #category : #initialization }
 TodoTaskPresenter >> initializeDialogWindow: aDialogWindowPresenter [
 
 	aDialogWindowPresenter
-		title: 'New task';
+		title: self caption;
 		initialExtent: 350 @ 120;
 		addButton: 'Accept' do: [ :dialog | self accept. dialog close ];
 		addButton: 'Cancel' do: [ :dialog | dialog close ]
