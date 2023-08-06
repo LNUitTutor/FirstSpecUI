@@ -1,0 +1,53 @@
+Class {
+	#name : #TodoTaskPresenter,
+	#superclass : #SpPresenter,
+	#instVars : [
+		'task',
+		'titlePresenter'
+	],
+	#category : #CodeOfSpec20BookTodo
+}
+
+{ #category : #visiting }
+TodoTaskPresenter >> accept [
+
+	task title: titlePresenter text; save
+]
+
+{ #category : #visiting }
+TodoTaskPresenter >> caption [
+
+	^ self subclassResponsibility 
+]
+
+{ #category : #initialization }
+TodoTaskPresenter >> initializeDialogWindow: aDialogWindowPresenter [
+
+	aDialogWindowPresenter
+		title: self caption;
+		initialExtent: 350 @ 120;
+		addButton: 'Accept' do: [ :dialog | self accept. dialog close ];
+		addButton: 'Cancel' do: [ :dialog | dialog close ]
+]
+
+{ #category : #initialization }
+TodoTaskPresenter >> initializePresenters [
+
+	titlePresenter := self newTextInput.
+	self layout: (SpBoxLayout newTopToBottom
+			 add: titlePresenter expand: false;
+			 yourself)
+]
+
+{ #category : #accessing }
+TodoTaskPresenter >> task: aTask [
+
+	task := aTask.
+	self updatePresenter
+]
+
+{ #category : #initialization }
+TodoTaskPresenter >> updatePresenter [
+
+	task ifNotNil: [ titlePresenter text: (task title ifNil: [ '' ]) ]
+]
