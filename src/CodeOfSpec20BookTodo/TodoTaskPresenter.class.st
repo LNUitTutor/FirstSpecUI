@@ -27,13 +27,14 @@ TodoTaskPresenter >> initializeDialogWindow: aDialogWindowPresenter [
 		title: self caption;
 		initialExtent: 350 @ 120;
 		addButton: 'Accept' do: [ :dialog | self accept. dialog close ];
-		addButton: 'Cancel' do: [ :dialog | dialog close ]
+		addButton: 'Cancel' do: [ :dialog | dialog close ].
 ]
 
 { #category : #initialization }
 TodoTaskPresenter >> initializePresenters [
 
-	titlePresenter := self newTextInput.
+	titlePresenter := self newTextInput";
+			whenDisplayDo: [ :presenter | presenter selectPrompt ]".
 	self layout: (SpBoxLayout newTopToBottom
 			 add: titlePresenter expand: false;
 			 yourself)

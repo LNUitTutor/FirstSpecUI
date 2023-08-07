@@ -14,7 +14,7 @@ Class {
 TodoListPresenter >> addTask [
 
 	(TodoNewTaskPresenter newApplication: self application)
-		task: TodoTask new;
+		task: TodoTask new; 
 		openModal.
 	self updatePresenter
 ]
