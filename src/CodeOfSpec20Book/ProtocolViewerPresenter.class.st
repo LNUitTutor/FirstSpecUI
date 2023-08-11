@@ -110,3 +110,21 @@ ProtocolViewerPresenter >> verticalLayout [
 		  add: #events;
 		  yourself
 ]
+
+{ #category : #api }
+ProtocolViewerPresenter >> whenSelectionInAPIChanged: aBlock [
+
+	api whenSelectionChangedDo: aBlock
+]
+
+{ #category : #api }
+ProtocolViewerPresenter >> whenSelectionInClassChanged: aBlock [
+
+	models whenSelectionChangedDo: aBlock
+]
+
+{ #category : #api }
+ProtocolViewerPresenter >> whenSelectionInEventChanged: aBlock [
+
+	events whenSelectionChangedDo: aBlock
+]
