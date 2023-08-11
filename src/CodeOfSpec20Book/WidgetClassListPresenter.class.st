@@ -30,3 +30,9 @@ WidgetClassListPresenter >> initializeWindow: aWindowPresenter [
 
 	aWindowPresenter title: 'Widgets'
 ]
+
+{ #category : #enumerating }
+WidgetClassListPresenter >> whenSelectionChangedDo: aBlock [
+
+	list whenSelectionChangedDo: aBlock
+]
