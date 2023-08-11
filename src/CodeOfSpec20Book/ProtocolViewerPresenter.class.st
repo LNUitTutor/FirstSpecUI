@@ -9,6 +9,34 @@ Class {
 	#category : #'CodeOfSpec20Book-MiniClassBrowser'
 }
 
+{ #category : #examples }
+ProtocolViewerPresenter class >> exampleCombine [
+
+	| inst |
+	inst := self new.
+	inst openWithLayout: inst combineLayout
+]
+
+{ #category : #examples }
+ProtocolViewerPresenter class >> exampleHorizontal [
+
+	| inst |
+	inst := self new.
+	inst openWithLayout: inst horizontalLayout
+]
+
+{ #category : #layout }
+ProtocolViewerPresenter >> combineLayout [
+
+	^ SpBoxLayout newLeftToRight
+		  add: #models;
+		  add: (SpBoxLayout newTopToBottom
+				   add: #api;
+				   add: #events;
+				   yourself);
+		  yourself
+]
+
 { #category : #initialization }
 ProtocolViewerPresenter >> connectPresenters [
 
