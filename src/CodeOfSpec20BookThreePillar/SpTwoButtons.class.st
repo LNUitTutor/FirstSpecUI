@@ -44,12 +44,13 @@ SpTwoButtons >> beRow [
 { #category : #layout }
 SpTwoButtons >> defaultLayout [
 
-	^ SpBoxLayout newTopToBottom
+	"^ SpBoxLayout newTopToBottom
 	     spacing: 10;
 		  add: button1 expand: false;
 		  add: button2 withConstraints: [ :cons | cons height: 80; width: 30];
 		  addLast: button3 expand: false;
-		  yourself
+		  yourself"
+		^ self class buttonRow
 ]
 
 { #category : #initialization }
