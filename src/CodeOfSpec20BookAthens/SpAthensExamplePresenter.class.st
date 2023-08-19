@@ -1,0 +1,43 @@
+Class {
+	#name : #SpAthensExamplePresenter,
+	#superclass : #SpPresenter,
+	#instVars : [
+		'paintPresenter'
+	],
+	#category : #CodeOfSpec20BookAthens
+}
+
+{ #category : #'instance creation' }
+SpAthensExamplePresenter class >> open [
+
+	<script>
+	self new open
+]
+
+{ #category : #layout }
+SpAthensExamplePresenter >> defaultLayout [
+
+	^ SpBoxLayout newTopToBottom
+		  add: paintPresenter;
+		  yourself
+]
+
+{ #category : #initialization }
+SpAthensExamplePresenter >> initializePresenters [
+
+	paintPresenter := self instantiate: SpAthensPresenter.
+	paintPresenter surfaceExtent: 600 @ 400.
+	paintPresenter drawBlock: [ :canvas | self render: canvas ]
+]
+
+{ #category : #rendering }
+SpAthensExamplePresenter >> render: canvas [
+
+	canvas setPaint: (canvas surface
+			 createLinearGradient: {
+					 (0 -> Color white).
+					 (1 -> Color black) }
+			 start: 0 @ 0
+			 stop: canvas surface extent).
+	canvas drawShape: (0 @ 0 extent: canvas surface extent)
+]
