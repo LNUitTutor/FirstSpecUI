@@ -27,6 +27,18 @@ AthensHello >> drawOn: aCanvas [
 	surface displayOnMorphicCanvas: aCanvas at: bounds origin
 ]
 
+{ #category : #geometry }
+AthensHello >> extent: aPoint [
+
+	| newExtent |
+	newExtent := aPoint rounded.
+	(bounds extent closeTo: newExtent) ifTrue: [ ^ self ].
+	bounds := bounds topLeft extent: newExtent.
+	surface := AthensCairoSurface extent: newExtent.
+	self layoutChanged.
+	self changed
+]
+
 { #category : #initialization }
 AthensHello >> initialize [
 
