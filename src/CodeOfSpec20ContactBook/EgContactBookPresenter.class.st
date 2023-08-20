@@ -78,12 +78,6 @@ EgContactBookPresenter >> contactBook [
 { #category : #layout }
 EgContactBookPresenter >> defaultLayout [
 
-	^ self defaultSpec
-]
-
-{ #category : #specs }
-EgContactBookPresenter >> defaultSpec [
-
 	^ SpBoxLayout newVertical
 		  add: #menuBar withConstraints: [ :constraints |
 			  constraints height: SpAbstractPresenter toolbarHeight ];
