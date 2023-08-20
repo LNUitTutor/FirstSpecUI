@@ -13,7 +13,7 @@ Class {
 { #category : #actions }
 TodoListPresenter >> addTask [
 
-	(TodoNewTaskPresenter newApplication: self application)
+	(TodoNewTaskPresenter newApplication: self application model: 'New task')
 		task: TodoTask new; 
 		openModal.
 	self updatePresenter
@@ -37,7 +37,7 @@ TodoListPresenter >> defaultLayout [
 { #category : #actions }
 TodoListPresenter >> editSelectedTask [
 
-	(TodoEditTaskPresenter newApplication: self application)
+	(TodoEditTaskPresenter newApplication: self application model: 'Edit task')
 		task: todoListPresenter selection selectedItem;
 	 	openModal.
 	self updatePresenter

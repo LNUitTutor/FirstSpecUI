@@ -3,7 +3,8 @@ Class {
 	#superclass : #SpPresenter,
 	#instVars : [
 		'task',
-		'titlePresenter'
+		'titlePresenter',
+		'caption'
 	],
 	#category : #CodeOfSpec20BookTodo
 }
@@ -17,14 +18,15 @@ TodoTaskPresenter >> accept [
 { #category : #visiting }
 TodoTaskPresenter >> caption [
 
-	^ self subclassResponsibility 
+	"^ self subclassResponsibility "
+	^ String empty 
 ]
 
 { #category : #initialization }
 TodoTaskPresenter >> initializeDialogWindow: aDialogWindowPresenter [
 
 	aDialogWindowPresenter
-		title: self caption;
+		title: "self" caption;
 		initialExtent: 350 @ 120;
 		addButton: 'Accept' do: [ :dialog | self accept. dialog close ];
 		addButton: 'Cancel' do: [ :dialog | dialog close ].
@@ -38,6 +40,12 @@ TodoTaskPresenter >> initializePresenters [
 	self layout: (SpBoxLayout newTopToBottom
 			 add: titlePresenter expand: false;
 			 yourself)
+]
+
+{ #category : #'accessing - model' }
+TodoTaskPresenter >> setModelBeforeInitialization: aString [
+
+	caption := aString
 ]
 
 { #category : #accessing }
