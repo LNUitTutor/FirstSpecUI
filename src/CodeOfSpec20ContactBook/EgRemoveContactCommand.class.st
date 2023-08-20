@@ -22,6 +22,9 @@ EgRemoveContactCommand >> canBeExecuted [
 { #category : #executing }
 EgRemoveContactCommand >> execute [
 
+	(self contactBookPresenter
+		 confirm: 'Do you want to remove ' , self selectedContact name , '?'
+		 label: 'Confirm please') ifFalse: [ ^ self ].
 	self contactBook removeContact: self selectedContact.
 	self contactBookPresenter updateView
 ]
