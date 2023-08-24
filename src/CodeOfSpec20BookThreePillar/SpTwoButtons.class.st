@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'button1',
 		'button2',
-		'button3'
+		'button3',
+		'stopwatch'
 	],
 	#category : #CodeOfSpec20BookThreePillar
 }
@@ -41,6 +42,14 @@ SpTwoButtons >> beRow [
 	self layout: self class buttonRow
 ]
 
+{ #category : #initialization }
+SpTwoButtons >> connectPresenters [ 
+
+button1 action: [ stopwatch activate ].
+button2 action: [ stopwatch suspend ].
+button3 action: [ UIManager default inform: 'Duration is: ', stopwatch duration seconds printString ]
+]
+
 { #category : #layout }
 SpTwoButtons >> defaultLayout [
 
@@ -62,4 +71,6 @@ SpTwoButtons >> initializePresenters [
 	button1 label: '1'.
 	button2 label: '2'.
 	button3 label: '3'.
+	
+stopwatch := Stopwatch new.
 ]
